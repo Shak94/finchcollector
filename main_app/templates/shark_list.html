@@ -1,0 +1,30 @@
+{% extends 'base.html' %}{% comment %} for head title tags and helping us with SEO {% endcomment %}
+{% block title %}Artist{% endblock  %}
+
+{% block content %}
+
+<h1 class="title pt-5">List of Sharks</h1>
+<a class="button is-dark" href="{% url 'shark_create' %}">Add Shark</a>
+<div class="gallery">
+  {% for shark in sharks %}
+  <a href="{% url 'shark_detail' shark.pk %}">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{shark.img}}" alt="{{shark.name}}" />
+        </figure>
+      </div>
+      <div class="card-header">
+        <p class="card-header-title">{{shark.name}}</p>
+      </div>
+    </div>
+  </a>
+	{% empty %}
+  <article class="message">
+    <div class="message-header">
+      <p>No Sharks to be displayed</p>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}
