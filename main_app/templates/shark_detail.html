@@ -12,19 +12,39 @@
     </div>
     <h1 class="title">{{shark.name}}</h1>
 </div>
+</div>
 <div class="detail__container">
     <div class="buttons">
-        <a href="" class="button is-info">
+        <a href="{% url 'shark_update' shark.pk %}" class="button is-info">
             <span class="icon">
                 <i class="fas fa-edit"></i>
             </span>
         </a>
-        <a href="" class="button is-danger">
+        <a href="{% url 'shark_delete' shark.pk %}" class="button is-danger">
             <span class="icon">
                 <i class="fas fa-trash-alt"></i>
             </span>
         </a>
     </div>
+    <div class="detail__songs mb-5">
+        <h3 class="title is-3">Shark Info</h3>
+
+        {% for more in shark.more.all %}
+        <div class="trait">
+            <span>{{ forloop.counter }}</span>
+            <div><b>Species:</b> {{ more.species }}</div>
+            <div><b>Discovered:</b> {{ more.discovered }}</div>
+            <br>
+        </div>
+            {% empty %}
+        <article class="message">
+          <div class="message-header">
+            <p>No Info Available</p>
+          </div>
+        </article>
+    
+        {% endfor %}
+      </div>
     <div class="detail__about">
         <h4 class="title is-4">About</h4>
         <p>{{shark.bio}}</p>
